@@ -48,7 +48,7 @@ namespace PractiseApplication.Controllers.Standalone
 
             AvailableRequests = CurrentUser.RequestRequesters.ToList();
             AvailableRequests.AddRange(CurrentUser.RequestExecutioners);
-            AvailableRequests.Distinct();
+            AvailableRequests = AvailableRequests.Distinct().ToList();
         }
         #endregion
 
@@ -160,7 +160,7 @@ namespace PractiseApplication.Controllers.Standalone
             foreach (var request in AvailableRequests)
             {
                 XWPFRun run = paragraph.CreateRun();
-                run.SetText(request.RequestCompletionTime.ToString("hh:mm"));
+                run.SetText(request.RequestCompletionTime.ToString("h'h 'm'm 's's'"));
 
                 if (request != AvailableRequests.Last())
                     run.AddBreak(BreakType.TEXTWRAPPING);

@@ -1,4 +1,6 @@
-﻿using PractiseApplication.Controllers;
+﻿using Microsoft.Win32;
+using PractiseApplication.Controllers;
+using PractiseApplication.Controllers.Standalone;
 using PractiseApplication.Models;
 using PractiseApplication.Models.Entities;
 using PractiseApplication.Views.Controls;
@@ -241,8 +243,31 @@ namespace PractiseApplication.Views
         private void RefreshRequestsListOnClick(object sender, RoutedEventArgs e) =>
                 UpdateRequestsList();
 
-        private void GenerateDocumentationOnClick(object sender, RoutedEventArgs e) =>
-                MessageBox.Show("⚒️ В разработке. ⚒️", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+        private void GenerateDocumentationOnClick(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new()
+            {
+                Title = "Выбор Пути — HelpTable",
+                Filter = "Документы Word (*.docx)|*.docx|Все файлы (*.*)|*.*",
+                AddExtension = true
+            };
+            var result = dialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                try
+                {
+                    ReportController controller = new(dialog.FileName, _model.User);
+                    controller.BeginDocumentCreation();
+
+                    MessageBox.Show($"Документ успешно создан.\n\nПуть: {dialog.FileName}.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Не удалось создать отчёт.\n\nОшибка: {ex.Message}.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
 
         private void OpenRequestCreationDialogOnClick(object sender, RoutedEventArgs e)
         {

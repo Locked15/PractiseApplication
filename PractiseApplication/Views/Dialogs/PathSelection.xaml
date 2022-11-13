@@ -1,0 +1,38 @@
+﻿<Window x:Class="PractiseApplication.Views.Dialogs.PathSelection"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PractiseApplication.Views.Dialogs"
+        mc:Ignorable="d"
+        Title="Выбор Пути — HelpTable" 
+        Height="260" Width="360"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="2.5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="90*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Укажите путь, где будет сохранен файл с отчётом. Указание только директории создаст документ с названием по умолчанию." 
+                   TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" FontStyle="Italic"/>
+
+        <TextBox Name="pathInput" Grid.Row="2" Grid.Column="0" Margin="2.5" Style="{StaticResource RoundedTextBox}" TextChanged="TextBox_TextChanged"/>
+        <Button Name="openExplorer" Grid.Row="2" Grid.Column="2" Content="📂" Margin="15" Style="{StaticResource RoundedButton}" BorderBrush="Black"
+                Background="LightGray" Click="openExplorer_Click"/>
+
+        <Button Name="continueButton" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="7.5" Content="Проверить и Продолжить"
+                Style="{StaticResource RoundedButton}" Click="continueButton_Click"/>
+    </Grid>
+</Window>
