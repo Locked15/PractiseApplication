@@ -1,4 +1,5 @@
 ﻿using PractiseApplication.Models.Entities;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -27,39 +28,16 @@ namespace PractiseApplication.Views.Controls
 
         private void ColorizeBordersByRequestStatus()
         {
-            switch (Model.RequestStatusId)
-            {
-                // 'Новый' — 'Sky Blue' color.
-                case 1:
-                    headerBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(136, 196, 245));
-                    bodyBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(136, 196, 245));
+            var redValue = Model.RequestStatus?.ColorRgbStringValue.Split(", ")[0] ?? "0";
+            var greenValue = Model.RequestStatus?.ColorRgbStringValue.Split(", ")[1] ?? "0";
+            var blueValue = Model.RequestStatus?.ColorRgbStringValue.Split(", ")[2] ?? "0";
 
-                    break;
-                // 'Важный' — 'Orange' color.
-                case 2:
-                    headerBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(232, 105, 18));
-                    bodyBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(232, 105, 18));
-
-                    break;
-                // 'Критический' — 'Dark Red' color.
-                case 3:
-                    headerBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(149, 47, 47));
-                    bodyBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(149, 47, 47));
-
-                    break;
-                // 'Отложенный' — 'Gray' color.
-                case 4:
-                    headerBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(153, 153, 153));
-                    bodyBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(153, 153, 153));
-
-                    break;
-                // 'Решенный' — 'Dark Green' color.
-                case 5:
-                    headerBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 100, 0));
-                    bodyBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 100, 0));
-
-                    break;
-            }
+            headerBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(Convert.ToByte(redValue), 
+                                                                         Convert.ToByte(greenValue), 
+                                                                         Convert.ToByte(blueValue)));
+            bodyBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(Convert.ToByte(redValue),
+                                                                       Convert.ToByte(greenValue),
+                                                                       Convert.ToByte(blueValue)));
         }
     }
 }
