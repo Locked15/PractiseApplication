@@ -1,0 +1,81 @@
+﻿<Window x:Class="PractiseApplication.Views.Dialogs.LocationCreation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PractiseApplication.Views.Dialogs"
+        xmlns:binding="clr-namespace:PractiseApplication.Controllers.Dialogs"
+        mc:Ignorable="d"
+        Title="Внедрение Локации — HelpTable" 
+        Height="250" Width="300"
+        ResizeMode="CanMinimize"
+        Closing="ConfirmUserOnDialogExit">
+
+    <Window.DataContext>
+        <binding:LocationCreationController/>
+    </Window.DataContext>
+
+    <Grid Margin="2.5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="45*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="25*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Begin: Label and Border. -->
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="Мастер Внедрения Локаций" FontSize="20"
+               FontStyle="Italic"/>
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" BorderBrush="Gray" BorderThickness="1.5"
+                CornerRadius="3.14"/>
+
+        <!-- Intermediate: Content. -->
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="3.14">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="25*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45*"/>
+                <ColumnDefinition Width="55*"/>
+                <ColumnDefinition Width="55*"/>
+                <ColumnDefinition Width="45*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- First Row: Floor and Cabinet. -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Этаж*:" FontSize="16" />
+            <TextBox Name="floorInput" Grid.Row="0" Grid.Column="1" FontSize="15" Margin="2.5" Text="{Binding Path=Model.Floor}"/>
+
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Кабинет*:" FontSize="16"/>
+            <TextBox Name="cabinetInput" Grid.Row="0" Grid.Column="3" FontSize="15" Margin="2.5"  Text="{Binding Path=Model.Cabinet}"/>
+
+            <!-- Second Row: Municipality. -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" Text="Муниципалитет*:"/>
+            <TextBox Name="municipalityInput" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" FontSize="15" Margin="2.5" Text="{Binding Path=Model.Municipality}"/>
+
+            <!-- Third Row: Table and Warning. -->
+            <TextBlock Grid.Row="2" Grid.Column="0" FontSize="16" Text="Стол:" />
+            <TextBox Name="tableInput" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="2.5" Text="{Binding Path=Model.Table}"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" TextWrapping="Wrap" FontStyle="Italic" FontFamily="Georgia"
+                   FontSize="8" Foreground="Gray" Text="Поля, отмеченные '*' обязательны для заполнения." TextAlignment="Right"
+                   VerticalAlignment="Bottom" Margin="2.5"/>
+        </Grid>
+
+        <!-- End: Button(s). -->
+        <Button Name="denyLocation" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource RoundedButton}"
+                BorderBrush="Black" Background="DarkRed" Content="Отмена" FontSize="18" FontStyle="Italic" Margin="5" Click="DenyLocationCreationOnClick"/>
+        <Button Name="createLocation" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource RoundedButton}" 
+                BorderBrush="Black" Background="DarkOliveGreen" Content="Создать" FontSize="18" FontStyle="Italic"
+                Click="TryToCreateNewLocationOnClick" Margin="5"/>
+    </Grid>
+</Window>

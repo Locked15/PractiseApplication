@@ -1,0 +1,85 @@
+﻿<Window x:Class="PractiseApplication.Views.EntryPoint"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PractiseApplication"
+        xmlns:binding="clr-namespace:PractiseApplication.Controllers"
+        mc:Ignorable="d"
+        Title="Вход — HelpTable" 
+        Height="320" Width="340"
+        ResizeMode="CanMinimize"
+        KeyUp="ProcessEnterKeyUse">
+
+    <Window.DataContext>
+        <binding:EntryPointController/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="130*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="12.5*"/>
+            <ColumnDefinition Width="52.5*"/>
+            <ColumnDefinition Width="12.5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" BorderThickness="3.14" CornerRadius="7.42"
+                    BorderBrush="CornflowerBlue"/>
+
+            <Image Source="../Resources/Backgrounds/register_background-icon-upper.png" Stretch="UniformToFill"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="18.25*"/>
+                <RowDefinition Height="22.5*"/>
+                <RowDefinition Height="17.5*"/>
+                <RowDefinition Height="22.5*"/>
+                <RowDefinition Height="17.5*"/>
+                <RowDefinition Height="18.25*"/>
+                <RowDefinition Height="31*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="22" Content="Вход в Систему"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" FontStyle="Italic" Text="Имя Пользователя:"/>
+            <TextBox Name="userLoginInput" Grid.Row="3" Grid.Column="0" Text="{Binding Path=Model.Login}"/>
+            <CheckBox Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" Margin="7.5, 0, 0, 0"
+                      ToolTip="Запомнить имя пользователя для последующих входов?" IsChecked="{Binding Path=Model.SaveLogin}"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" FontStyle="Italic" Text="Пароль:"/>
+            <Grid Grid.Row="5" Grid.Column="0">
+                <PasswordBox Name="passwordInput_Hidden" PasswordChar="*" PasswordChanged="OnChangeOfTheVisiblePasswordBox"/>
+                <TextBox Name="passwordInput_Visible" Visibility="Hidden" TextChanged="OnChangeOfTheHiddenPasswordBox" 
+                         ToolTip="В целях безопасности пароль инвертирован."/>
+            </Grid>
+            <Button Name="switchVisibilityMode" Grid.Row="5" Grid.Column="1" Style="{StaticResource ResourceKey=RoundedButton}"
+                    BorderBrush="DodgerBlue" Background="Azure" Margin="1" Click="SwitchStateOfTheVisibilitySwitcherOnClick">
+                <Image Name="switchVisibilityModeImage" Source="../Resources/Icons/show-hide/show.png" Stretch="Fill"/>
+            </Button>
+
+            <Button Name="tryToAuthorize" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Content="Войти"
+                    Style="{StaticResource ResourceKey=RoundedButton}" BorderBrush="CornflowerBlue" Background="CadetBlue"
+                    FontSize="22" Click="TryToAuthorizeOnUserClick" Margin="2.5"/>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Border BorderBrush="LightBlue" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" CornerRadius="4.72"
+                    BorderThickness="3.14"/>
+
+            <Image Source="../Resources/Backgrounds/register_background-icon-lower.png" Stretch="UniformToFill"/>
+        </Grid>
+    </Grid>
+</Window>

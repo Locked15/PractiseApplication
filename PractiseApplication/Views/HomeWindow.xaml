@@ -1,0 +1,167 @@
+﻿<Window x:Class="PractiseApplication.Views.HomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PractiseApplication.Views"
+        xmlns:binding="clr-namespace:PractiseApplication.Controllers"
+        mc:Ignorable="d"
+        Title="Рабочий Кабинет — HelpTable" 
+        Height="480" Width="840"
+        MinHeight="360" MinWidth="720"
+        Loaded="PerformActionsOnWindowLoaded"
+        SizeChanged="OnWindowSizeChanged"
+        Closing="StopNewsServiceOnClose">
+
+    <Window.DataContext>
+        <binding:HomeWindowController/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="170*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Left Panel. -->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Margin="2.5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60*"/>
+                <RowDefinition Height="180*"/>
+                <RowDefinition Height="180*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="⚒️Панель 📝Управления ⭐Заявками" TextWrapping="Wrap" 
+                       TextAlignment="Left" VerticalAlignment="Top" FontSize="14" FontStyle="Italic"/>
+
+            <!-- Admin Tools. -->
+            <Grid Name="adminToolsPanel" Grid.Row="1" Grid.Column="0" Margin="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="90*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Панель Админа" FontStyle="Italic" TextAlignment="Left"
+                           FontSize="16"/>
+
+                <RibbonButton Grid.Row="1" Grid.Column="0" Label="Создать аккаунт" Margin="1"
+                              Background="LightGray" BorderBrush="Black" Click="CreateNewUserAccountOnClick"
+                              SmallImageSource="../Resources/Icons/misc/admin/add-new-user.png"/>
+                <RibbonButton Grid.Row="2" Grid.Column="0" Label="Добавить локацию" Margin="1"
+                              Background="LightGray" BorderBrush="Black" Click="CreateNewLocationOnClick"
+                              SmallImageSource="../Resources/Icons/misc/admin/add-new-location.png"/>
+            </Grid>
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1"/>
+
+            <!-- General Tools. -->
+            <Grid Name="generalToolsPanel" Grid.Row="2" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="90*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Общее" FontStyle="Italic" HorizontalContentAlignment="Left"
+                       FontSize="16"/>
+
+                <RibbonButton Grid.Row="1" Grid.Column="0" Label="Обновить Страницу" Margin="1"
+                              Background="#EDEDED" BorderBrush="Black" Click="RefreshRequestsListOnClick"
+                              SmallImageSource="../Resources/Icons/misc/general/update-requests.png"/>
+                <RibbonButton Grid.Row="2" Grid.Column="0" Label="Создать Документ" Margin="1"
+                              Background="#EDEDED" BorderBrush="Black" Click="GenerateDocumentationOnClick"
+                              SmallImageSource="../Resources/Icons/misc/general/create-document.png"/>
+            </Grid>
+            <Border Grid.Row="2" Grid.Column="0" BorderBrush="Black" BorderThickness="1"/>
+
+            <!-- Main Tool. -->
+            <RibbonButton Name="createNewRequest" Grid.Row="3" Grid.Column="0" Label="Создать Заявку" FontSize="14"
+                          SmallImageSource="../Resources/Icons/requests/create-new.png" BorderBrush="Black" 
+                          Background="Azure" Click="OpenRequestCreationDialogOnClick"/>
+        </Grid>
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" BorderBrush="Black" BorderThickness="1.5"
+                CornerRadius="3.14"/>
+
+        <!-- Top Panel. -->
+        <Grid Grid.Row="0" Grid.Column="1" Margin="2.5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="175*"/>
+                <ColumnDefinition Width="125*"/>
+                <ColumnDefinition Width="125*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Base Controls Group. -->
+            <RibbonCheckBox Name="showOnlyTargeted" Grid.Row="0" Grid.Column="0" Label="Только назнач. заявки" HorizontalContentAlignment="Left"
+                            SmallImageSource="../Resources/Icons/requests/target-request.png"
+                            IsChecked="{Binding Path=Model.ShowOnlyTargetedRequests}"/>
+            <RibbonCheckBox Name="showOnlyActive" Grid.Row="1" Grid.Column="0" Label="Только активные" HorizontalContentAlignment="Left"
+                            SmallImageSource="../Resources/Icons/requests/in-progress.png"
+                            IsChecked="{Binding Path=Model.ShowOnlyActiveRequests}"/>
+
+            <!-- Search Group.-->
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Поиск:" FontSize="16"/>
+            <TextBox Name="searchBox" Grid.Row="1" Grid.Column="1" Margin="1.5" Style="{StaticResource RoundedTextBox}"/>
+
+            <!-- Sort Group. -->
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Сортировка:" FontSize="16"/>
+            <ComboBox Name="sortBox" Grid.Row="1" Grid.Column="2" Margin="1.5" HorizontalContentAlignment="Center"
+                      SelectedIndex="{Binding Path=Model.SortIndex}" FontSize="10">
+                <ComboBoxItem Content="Без Сортировки ✖️" HorizontalContentAlignment="Left"/>
+
+                <ComboBoxItem Content="📈 По Возрастанию:" FontSize="18" IsEnabled="False"/>
+                <ComboBoxItem Content="Дата 🗓️" HorizontalContentAlignment="Left"/>
+                <ComboBoxItem Content="Число Ответов 💬" HorizontalContentAlignment="Left"/>
+                <ComboBoxItem Content="Тип Заявки 💽" HorizontalContentAlignment="Left"/>
+
+                <ComboBoxItem Content="📉 По Убыванию:" FontSize="18" IsEnabled="False"/>
+                <ComboBoxItem Content="Дата 🗓️" HorizontalContentAlignment="Left"/>
+                <ComboBoxItem Content="Число Ответов 💬" HorizontalContentAlignment="Left"/>
+                <ComboBoxItem Content="Тип Заявки 💽" HorizontalContentAlignment="Left"/>
+            </ComboBox>
+
+            <!-- State Group. -->
+            <TextBlock Grid.Row="0" Grid.Column="3" Text="Состояние:" FontSize="16"/>
+            <ComboBox Name="stateBox" Grid.Row="1" Grid.Column="3" Margin="1.5" HorizontalContentAlignment="Center"
+                      SelectedItem="{Binding Path=Model.StatusFilter}" DisplayMemberPath="Status"/>
+        </Grid>
+        <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1.5"/>
+
+        <!-- Content and Bottom Panels. -->
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="2.5">
+            <ListView Name="selectedRequestsList" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden" MouseDoubleClick="OpenRequestDetailsOnDoubleClick"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" Margin="0, 2.5, 0, 0" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170*"/>
+                <ColumnDefinition Width="300*"/>
+                <ColumnDefinition Width="200*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" Background="DarkGray">
+                <Border BorderBrush="Black" BorderThickness="2.5"/>
+                <Button Name="exitFromAccaunt" Content="Выйти" Style="{StaticResource RoundedButton}" Margin="5, 5, 50, 5"
+                        BorderBrush="Black" Background="DarkRed" FontSize="16" FontStyle="Italic"
+                        Click="ConfirmUserExitingFromAccount"/>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="2" Background="LightGray">
+                <Border BorderBrush="Black" BorderThickness="1.5"/>
+                <TextBlock Name="newsLine" FontSize="8" FontStyle="Italic" FontWeight="ExtraBold" Text="Информация о новых заявках появится здесь."
+                           TextAlignment="Right" Margin="50, 5, 5, 5" TextWrapping="Wrap"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

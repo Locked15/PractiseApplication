@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ApplicationIcon>Resources\Icons\app-icon.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Icons\misc\add-new-location.png" />
+	  <None Remove="Resources\Icons\misc\add-new-user.png" />
+	  <None Remove="Resources\Icons\misc\general\create-document.png" />
+	  <None Remove="Resources\Icons\misc\general\update-requests.png" />
+	  <None Remove="Resources\Icons\requests\create-new.png" />
+	  <None Remove="Resources\Icons\requests\in-progress.png" />
+	  <None Remove="Resources\Icons\requests\target-request.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Resources\Icons\app-icon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+		<PackageReference Include="Npgsql" Version="7.0.0" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Resources\Backgrounds\register_background-icon-lower.png" />
+		<Resource Include="Resources\Backgrounds\register_background-icon-upper.png" />
+		<Resource Include="Resources\Icons\misc\admin\add-new-location.png" />
+		<Resource Include="Resources\Icons\misc\admin\add-new-user.png" />
+		<Resource Include="Resources\Icons\misc\general\create-document.png" />
+		<Resource Include="Resources\Icons\misc\general\update-requests.png" />
+		<Resource Include="Resources\Icons\requests\create-new.png" />
+		<Resource Include="Resources\Icons\requests\in-progress.png" />
+		<Resource Include="Resources\Icons\requests\target-request.png" />
+		<Resource Include="Resources\Icons\show-hide\hide.png" />
+		<Resource Include="Resources\Icons\show-hide\show.png" />
+	</ItemGroup>
+
+</Project>
