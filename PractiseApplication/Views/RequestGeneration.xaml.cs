@@ -84,7 +84,7 @@ namespace PractiseApplication.Views
             }
             else
             {
-                MessageBox.Show($"Обнаружены ошибки:\n{errors}.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Обнаружены ошибки:\n{errors}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 return false;
             }
@@ -94,11 +94,11 @@ namespace PractiseApplication.Views
         {
             var errors = string.Empty;
             if (string.IsNullOrWhiteSpace(_model.Title))
-                errors += "У запроса должен быть заголовок.\n";
+                errors += "У заявки должен быть заголовок.\n";
             if (_model.Location == null)
-                errors += "У запроса должна быть указана локация.\n";
+                errors += "У заявки должна быть указана локация.\n";
             if (_model.RequestType == null)
-                errors += "У запроса должен быть указан тип.\n";
+                errors += "У заявки должен быть указан тип.\n";
 
             return errors;
         }

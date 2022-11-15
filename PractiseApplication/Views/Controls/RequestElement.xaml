@@ -60,9 +60,9 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=BeginDate, StringFormat=mm:HH — dd.MM.yyyy!}"
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=BeginDate, StringFormat=HH:mm:ss — dd.MM.yyyy!}"
                        FontSize="10" TextAlignment="Right" ToolTip="Дата и Время размещения заявки."/>
-                <TextBlock Name="completionDate" Grid.Row="1" Grid.Column="0" Text="{Binding Path=EndDate, StringFormat=mm:HH — dd.MM.yyyy!}"
+                <TextBlock Name="completionDate" Grid.Row="1" Grid.Column="0" Text="{Binding Path=EndDate, StringFormat=HH:mm:ss — dd.MM.yyyy!}"
                        FontSize="10" TextAlignment="Right" ToolTip="Дата и Время выполнения заявки."/>
                 <TextBlock Name="allTime" Grid.Row="2" Grid.Column="0" Text="{Binding Path=RequestCompletionTime, StringFormat=hh\\:mm\\:ss}"
                        FontSize="10" TextAlignment="Right" ToolTip="Общее время выполнения."/>

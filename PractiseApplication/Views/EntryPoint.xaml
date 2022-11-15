@@ -63,8 +63,7 @@
             <TextBlock Grid.Row="4" Grid.Column="0" FontStyle="Italic" Text="Пароль:"/>
             <Grid Grid.Row="5" Grid.Column="0">
                 <PasswordBox Name="passwordInput_Hidden" PasswordChar="*" PasswordChanged="OnChangeOfTheVisiblePasswordBox"/>
-                <TextBox Name="passwordInput_Visible" Visibility="Hidden" TextChanged="OnChangeOfTheHiddenPasswordBox" 
-                         ToolTip="В целях безопасности пароль инвертирован."/>
+                <TextBox Name="passwordInput_Visible" Visibility="Hidden" TextChanged="OnChangeOfTheHiddenPasswordBox"/>
             </Grid>
             <Button Name="switchVisibilityMode" Grid.Row="5" Grid.Column="1" Style="{StaticResource ResourceKey=RoundedButton}"
                     BorderBrush="DodgerBlue" Background="Azure" Margin="1" Click="SwitchStateOfTheVisibilitySwitcherOnClick">

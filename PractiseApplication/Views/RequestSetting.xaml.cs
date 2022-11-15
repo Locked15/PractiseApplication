@@ -132,11 +132,13 @@ namespace PractiseApplication.Views
 
         private void SendMessageAndUpdateStatusOnClick(object sender, RoutedEventArgs e)
         {
+            bool sendMessage = !string.IsNullOrWhiteSpace(newMessageText.Text);
+
             SetModelStatusBySelected();
-            if (newMessageText.Text is var text && !string.IsNullOrWhiteSpace(text))
+            if (sendMessage)
                 SendMessageOnClick(true, default);
 
-            BeginRequestSavingOnClick(false, default);
+            BeginRequestSavingOnClick(!sendMessage, default);
             CloseWindowAndHandleHomeUpdate();
         }
         #endregion
@@ -153,15 +155,15 @@ namespace PractiseApplication.Views
 
         private void BeginRequestSavingOnClick(object sender, RoutedEventArgs e)
         {
-            NormalizeGeneratingObject();
+            NormalizeGeneratingObject(sender is bool writeStatus && writeStatus);
             SaveObjectToDbContext();
 
             saveChanges.Visibility = Visibility.Hidden;
         }
 
-        private void NormalizeGeneratingObject()
+        private void NormalizeGeneratingObject(bool writeStatus = true)
         {
-            if (_model.Request?.RequestStatus?.Id != BasicData.statusId)
+            if (_model.Request?.RequestStatus?.Id != BasicData.statusId && writeStatus)
             {
                 WriteMessageToDbContext(false, $"{_user.Bind_UserName} изменил статус:\n" +
                                                $"{_controller.GetStatusById(BasicData.statusId)?.Status} -> {_model.Request?.RequestStatus?.Status}.");

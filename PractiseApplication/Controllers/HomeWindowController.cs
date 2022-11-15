@@ -1,4 +1,5 @@
-﻿using PractiseApplication.Models;
+﻿using Org.BouncyCastle.Ocsp;
+using PractiseApplication.Models;
 using PractiseApplication.Models.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace PractiseApplication.Controllers
             return Model.User.RoleId switch
             {
                 1 => Model.Requests = BaseContext.Instance.Requests.Where(req => req.RequesterId == Model.User.Id).ToList(),
-                2 => Model.Requests = BaseContext.Instance.Requests.Where(req => req.ExecutionerId == Model.User.Id).ToList(),
+                2 => Model.Requests = BaseContext.Instance.Requests.Where(req => req.ExecutionerId == Model.User.Id || req.RequesterId == Model.User.Id).ToList(),
                 3 => Model.Requests = BaseContext.Instance.Requests.ToList(),
 
                 _ => Enumerable.Empty<Request>().ToList()

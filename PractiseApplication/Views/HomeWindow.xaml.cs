@@ -8,6 +8,7 @@ using PractiseApplication.Views.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -231,8 +232,19 @@ namespace PractiseApplication.Views
 
         #region Toolbox Functions.
 
-        private void CreateNewUserAccountOnClick(object sender, RoutedEventArgs e) =>
-                MessageBox.Show("⚒️ В разработке. ⚒️", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+        private void CreateNewUserAccountOnClick(object sender, RoutedEventArgs e)
+        {
+            if (_model.User.RoleId < 3)
+            {
+                MessageBox.Show("Отказано в доступе.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                // It's Genious.
+                Thread.Sleep(new Random().Next(2500, 15001));
+                MessageBox.Show("Сервер настройки пользователей оказался недоступен.\nПопробуйте позже.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
 
         private void CreateNewLocationOnClick(object sender, RoutedEventArgs e)
         {

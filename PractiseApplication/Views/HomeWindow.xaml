@@ -133,7 +133,7 @@
             </ComboBox>
 
             <!-- State Group. -->
-            <TextBlock Grid.Row="0" Grid.Column="3" Text="Состояние:" FontSize="16"/>
+            <TextBlock Grid.Row="0" Grid.Column="3" Text="Статус:" FontSize="16"/>
             <ComboBox Name="stateBox" Grid.Row="1" Grid.Column="3" Margin="1.5" HorizontalContentAlignment="Center"
                       SelectedItem="{Binding Path=Model.StatusFilter}" DisplayMemberPath="Status"/>
         </Grid>
